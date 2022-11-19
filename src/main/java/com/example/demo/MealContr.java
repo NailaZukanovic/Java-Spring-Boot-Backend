@@ -16,44 +16,43 @@ import org.springframework.web.bind.annotation.RestController;
 public class MealContr {
 
 @Autowired
-CatRep catRep;
+MealRep mealRep;
 
-@GetMapping(“/getAllCategories”)
+@GetMapping(“/getAllMeals”)
 public List<Meals> getAllMeals()
 {
-return catRep.findAll();
+return mealRep.findAll();
 }
 
-@GetMapping(“/getBookById/{id}”)
-public Optional<Category> getCategoryById(@PathVariable(value=”id”) Long id)
+@GetMapping(“/getMealsById/{id}”)
+public Optional<Meals> getMealsById(@PathVariable(value=”id”) Long id)
 {
-return catRep.findById(id);
+return mealRep.findById(id);
 }
 
-@PostMapping(“/addCategory”)
-public Category addCategory(@RequestBody Category category)
+@PostMapping(“/addMeals”)
+public Meals addMeals(@RequestBody Meals Meals)
 {
-return catRep.save(category);
+return mealRep.save(Meals);
 }
 
-@PutMapping(“/updateCategory/{id}”)
-public Category updateCategory(@PathVariable(value=”id”) Long id, @RequestBody Category category)
+@PutMapping(“/updateMeals/{id}”)
+public Meals updateMeals(@PathVariable(value=”id”) Long id, @RequestBody Meals Meals)
 {
-Optional<Category> category = catRep.findById(id);
-Category book_new=category.get();
-book_new.setStrCategory(category.getStrCategory());
-book_new.setstrCategoryThumb(category.getstrCategoryThumb());
-book_new.setstrCategoryDescription(category.getstrCategoryDescription());
-return catRep.save(book_new);
+Optional<Meals> Meals = mealRep.findById(id);
+Meals book_new=Meals.get();
+book_new.setStrMeals(Meals.getStrMeals());
+book_new.setstrMealsThumb(Meals.getstrMealsThumb());
+return mealRep.save(book_new);
 
 }
 
-@DeleteMapping(“/deleteCategory/{id}”)
-public void deleteCategory(@PathVariable(value=”id”) Long id)
+@DeleteMapping(“/deleteMeals/{id}”)
+public void deleteMeals(@PathVariable(value=”id”) Long id)
 {
-Optional<Category> category=catRep.findById(id);
-Category book_new=category.get();
-catRep.delete(book_new);
+Optional<Meals> Meals=mealRep.findById(id);
+Meals book_new=Meals.get();
+mealRep.delete(book_new);
 }
 
 }
